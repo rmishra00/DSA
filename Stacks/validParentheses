@@ -1,0 +1,57 @@
+class stack {
+  constructor() {
+    this.items = [];
+  }
+  push(element) {
+    this.items.push(element);
+  }
+  pop() {
+    if (this.isEmpty()) {
+      console.log('stack is empty')
+    }
+    return this.items.pop();
+  }
+  peek() {
+    if (this.isEmpty()) {
+      console.log('stack is empty');
+    }
+    return this.items[this.items.length - 1]
+  }
+  isEmpty() {
+    return this.items.length === 0;
+  }
+  size() {
+    return this.items.length;
+  }
+}
+class Solution {
+  /**
+   * @param {string} s
+   * @return {boolean}
+   */
+
+  isValid(s) {
+    const charArr = s.split('');
+    const newStack = new stack();
+    let i = 0;
+    while (i < charArr.length) {
+      if (charArr[i] === '{' || charArr[i] === '(' || charArr[i] === '[') {
+        newStack.push(charArr[i]);
+      } else {
+        if (newStack.size() === 0) {
+          return false;
+        }
+        if ((charArr[i] === '}' && newStack.peek() === '{') ||
+          (charArr[i] === ')' && newStack.peek() === '(') ||
+          (charArr[i] === ']' && newStack.peek() === '[')) {
+          newStack.pop();
+        }
+        else {
+          return false;
+        }
+        i++;
+      }
+    }
+    return newStack.size === 0;
+  }
+}

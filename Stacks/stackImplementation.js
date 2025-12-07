@@ -9,12 +9,14 @@ class stack{
   pop(){
    if(this.isEmpty()){
     console.log('stack is empty');
+    return;
    }
    return this.items.pop();
   }
   peek(){
     if(this.isEmpty()){
       console.log('stack is empty');
+      return;
     }
     return this.items[this.items.length-1];
   }
