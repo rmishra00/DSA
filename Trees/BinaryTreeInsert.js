@@ -32,7 +32,7 @@ class BinaryTree{
         }
         if(value<current.val){
             if(current.left === null){
-            current.next = newNode;
+            current.left = newNode;
             return this;
         }
                 current = current.next;  
