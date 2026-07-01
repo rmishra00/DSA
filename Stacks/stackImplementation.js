@@ -22,10 +22,16 @@ class stack{
   }
 
   isEmpty(){
-    return this.items.length;
+    return this.items.length===0;
   }
   size(){
     return this.items.length;
+  }
+  getMin(){
+     if(this.isEmpty()){
+            return;
+        }
+        return Math.min(this.items);
   }
 }
 

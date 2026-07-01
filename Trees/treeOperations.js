@@ -122,6 +122,18 @@ class BinaryTree{
     this.mirrorTree(node.right);
     return node;
   }
+  isSameTree(node1, node2){
+    if(node1 === null && node2 ===null){
+      return true;
+    }else if(node1 ===null ||node2 ===null){
+      return false;
+    }
+    if(node1.value !== node2.value){
+      return false;
+    }
+   return this.identicalTree(node1.left, node2.left)&&this.identicalTree(node2.left, node2.right);
+
+  }
 }
 const tree = new BinaryTree();
 tree.root = new TreeNode(10);
