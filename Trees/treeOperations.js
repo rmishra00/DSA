@@ -53,7 +53,7 @@ class BinaryTree{
   }
   maxNode(node){
     if(node===null){
-      return 0;
+      return -Infinity;
     }
     return Math.max(this.maxNode(node.left), this.maxNode(node.right), node.value);
   }
@@ -75,20 +75,60 @@ class BinaryTree{
     }
     return this.countLeafNodes(node.left)+this.countLeafNodes(node.right);
   }
+  countNonLeafNodes(node){
+    if(node === null){
+      return 0;
+    }
+
+    if(node.left === null && node.right ===null){
+      return 0;
+    }
+    return this.countNonLeafNodes(node.left)+this.countNonLeafNodes(node.right)+1;
+  }
+  findMinNode(node){
+    if(node === null){
+      return Infinity;
+    }
+    return Math.min(this.findMinNode(node.left),this.findMinNode(node.right), node.value);
+  }
+  breadthFirstSearch(node){
+    if(node===null){
+      return [];
+    }
+    const queue = [];
+    const result = [];
+    queue.push(node);
+    while(queue.length){
+      const current = queue.shift();
+      result.push(current.value);
+      if(current.left){
+        queue.push(current.left);
+      }
+      if(current.right){
+        queue.push(current.right);
+      }
+      
+    }
+    return result;
+  }
 }
-
-
 const tree = new BinaryTree();
 tree.root = new TreeNode(10);
 tree.root.left = new TreeNode(5);
 tree.root.right = new TreeNode(15);
 tree.root.left.left = new TreeNode(3);
 tree.root.left.right = new TreeNode(7);
-console.log('y', tree.preOrder(tree.root));
-console.log(tree.sumOfNodes(tree.root));
-console.log(tree.maxNode(tree.root));
-console.log(tree.searchNode(tree.root, 3));
-console.log(tree.countLeafNodes(tree.root));  
+// console.log('y', tree.preOrder(tree.root));
+// console.log(tree.sumOfNodes(tree.root));
+// console.log(tree.maxNode(tree.root));
+// console.log(tree.searchNode(tree.root, 3));
+// console.log(tree.countLeafNodes(tree.root));  
+// console.log(tree.countNonLeafNodes(tree.root));
+// console.log(tree.findMinNode(tree.root));
+console.log(tree.breadthFirstSearch(tree.root));
+
+
+
 
 
 
