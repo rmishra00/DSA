@@ -111,6 +111,17 @@ class BinaryTree{
     }
     return result;
   }
+  mirrorTree(node){
+    if(node === null){
+      return null;
+    }
+    let temp = node.left;
+    node.left = node.right;
+    node.right = temp;
+    this.mirrorTree(node.left);
+    this.mirrorTree(node.right);
+    return node;
+  }
 }
 const tree = new BinaryTree();
 tree.root = new TreeNode(10);
@@ -125,7 +136,11 @@ tree.root.left.right = new TreeNode(7);
 // console.log(tree.countLeafNodes(tree.root));  
 // console.log(tree.countNonLeafNodes(tree.root));
 // console.log(tree.findMinNode(tree.root));
-console.log(tree.breadthFirstSearch(tree.root));
+// console.log(tree.breadthFirstSearch(tree.root));
+console.log(tree.mirrorTree(tree.root));
+console.log(tree.preOrder(tree.root));
+
+
 
 
 
