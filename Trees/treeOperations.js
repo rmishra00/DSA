@@ -170,6 +170,21 @@ class BinaryTree {
     }
     return true;
   }
+  diameterOfTheTree(root){
+    let diameter = 0;
+    function height(root){
+      if(root===null){
+        return 0;
+      }
+      const left = height(root.left);
+      const right = height(root.right);
+
+      diameter = Math.max(diameter, left+right);
+      return Math.max(left,right)+1;
+    }
+    height(root);
+    return diameter;
+  }
 }
 const tree = new BinaryTree();
 tree.root = new TreeNode(10);
