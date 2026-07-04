@@ -134,6 +134,15 @@ class BinaryTree{
    return this.identicalTree(node1.left, node2.left)&&this.identicalTree(node2.left, node2.right);
 
   }
+  isBalanced(node){
+    if(node === null){
+      return true;
+    }
+    if(Maths.abs(this.heightOfTree(node.left) - this.heightOfTree(node.right))>1){
+      return false;
+    }
+    return this.isBalanced(node.left)&&this.isBalanced(node.right);
+  }
 }
 const tree = new BinaryTree();
 tree.root = new TreeNode(10);
