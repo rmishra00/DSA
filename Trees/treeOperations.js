@@ -1,118 +1,118 @@
-class TreeNode{
-  constructor(value){
+class TreeNode {
+  constructor(value) {
     this.value = value;
     this.left = null;
     this.right = null;
   }
 }
-class BinaryTree{
-  constructor(){
+class BinaryTree {
+  constructor() {
     this.root = null;
   }
-  preOrder(node){
-    if(node === null){
+  preOrder(node) {
+    if (node === null) {
       return;
     }
     console.log(node.value);
     this.preOrder(node.left);
     this.preOrder(node.right);
   }
-  inOrder(node){
-    if(node===null){
+  inOrder(node) {
+    if (node === null) {
       return;
     }
     this.inOrder(node.left);
     console.log(node.value);
     this.inOrder(node.right);
   }
-  postOrder(node){
-    if(node===null){
+  postOrder(node) {
+    if (node === null) {
       return;
     }
     this.postOrder(node.left);
     this.postOrder(node.right);
     console.log(node.value);
   }
-  heightOfTree(node){
-    if(node===null){
+  heightOfTree(node) {
+    if (node === null) {
       return 0;
     }
-    return Math.max(this.heightOfTree(node.left), this.heightOfTree(node.right))+1;
+    return Math.max(this.heightOfTree(node.left), this.heightOfTree(node.right)) + 1;
   }
-  countNodes(node){
-    if(node===null){
+  countNodes(node) {
+    if (node === null) {
       return 0;
     }
-    return this.countNodes(node.left)+this.countNodes(node.right)+1;
+    return this.countNodes(node.left) + this.countNodes(node.right) + 1;
   }
-  sumOfNodes(node){
-    if(node===null){
+  sumOfNodes(node) {
+    if (node === null) {
       return 0;
     }
-    return this.sumOfNodes(node.left)+this.sumOfNodes(node.right)+node.value;
+    return this.sumOfNodes(node.left) + this.sumOfNodes(node.right) + node.value;
   }
-  maxNode(node){
-    if(node===null){
+  maxNode(node) {
+    if (node === null) {
       return -Infinity;
     }
     return Math.max(this.maxNode(node.left), this.maxNode(node.right), node.value);
   }
-  searchNode(node, target){
-    if(node === null){
+  searchNode(node, target) {
+    if (node === null) {
       return false;
     }
-    if(node.value === target){
+    if (node.value === target) {
       return true;
     }
-    return this.searchNode(node.left, target)||this.searchNode(node.right, target);
+    return this.searchNode(node.left, target) || this.searchNode(node.right, target);
   }
-  countLeafNodes(node){
-    if(node === null){
+  countLeafNodes(node) {
+    if (node === null) {
       return 0;
     }
-    if(node.left === null && node.right === null){
+    if (node.left === null && node.right === null) {
       return 1;
     }
-    return this.countLeafNodes(node.left)+this.countLeafNodes(node.right);
+    return this.countLeafNodes(node.left) + this.countLeafNodes(node.right);
   }
-  countNonLeafNodes(node){
-    if(node === null){
+  countNonLeafNodes(node) {
+    if (node === null) {
       return 0;
     }
 
-    if(node.left === null && node.right ===null){
+    if (node.left === null && node.right === null) {
       return 0;
     }
-    return this.countNonLeafNodes(node.left)+this.countNonLeafNodes(node.right)+1;
+    return this.countNonLeafNodes(node.left) + this.countNonLeafNodes(node.right) + 1;
   }
-  findMinNode(node){
-    if(node === null){
+  findMinNode(node) {
+    if (node === null) {
       return Infinity;
     }
-    return Math.min(this.findMinNode(node.left),this.findMinNode(node.right), node.value);
+    return Math.min(this.findMinNode(node.left), this.findMinNode(node.right), node.value);
   }
-  breadthFirstSearch(node){
-    if(node===null){
+  breadthFirstSearch(node) {
+    if (node === null) {
       return [];
     }
     const queue = [];
     const result = [];
     queue.push(node);
-    while(queue.length){
+    while (queue.length) {
       const current = queue.shift();
       result.push(current.value);
-      if(current.left){
+      if (current.left) {
         queue.push(current.left);
       }
-      if(current.right){
+      if (current.right) {
         queue.push(current.right);
       }
-      
+
     }
     return result;
   }
-  mirrorTree(node){
-    if(node === null){
+  mirrorTree(node) {
+    if (node === null) {
       return null;
     }
     let temp = node.left;
@@ -122,26 +122,53 @@ class BinaryTree{
     this.mirrorTree(node.right);
     return node;
   }
-  isSameTree(node1, node2){
-    if(node1 === null && node2 ===null){
+  isSameTree(node1, node2) {
+    if (node1 === null && node2 === null) {
       return true;
-    }else if(node1 ===null ||node2 ===null){
+    } else if (node1 === null || node2 === null) {
       return false;
     }
-    if(node1.value !== node2.value){
+    if (node1.value !== node2.value) {
       return false;
     }
-   return this.identicalTree(node1.left, node2.left)&&this.identicalTree(node2.left, node2.right);
+    return this.identicalTree(node1.left, node2.left) && this.identicalTree(node2.left, node2.right);
 
   }
-  isBalanced(node){
+  checkHeight(node){
+    if(node==null){
+      return 0;
+    }
+    const left = this.checkHeight(node.left);
+    if(left === -1){
+      return -1;
+    }
+    const right = this.checkHeight(node.right);
+    if(right === -1){
+      return -1;
+    }
+
+    if(Math.abs(left-right)>1){
+      return -1;
+    }
+    return Math.max(left, right)+1;
+  }
+  isBalanced(node) {
+    if (node === null) {
+      return true;
+    }
+    if (Maths.abs(this.heightOfTree(node.left) - this.heightOfTree(node.right)) > 1) {
+      return false;
+    }
+    return this.isBalanced(node.left) && this.isBalanced(node.right);
+  }
+  isBalancedOptimal(node){
     if(node === null){
       return true;
     }
-    if(Maths.abs(this.heightOfTree(node.left) - this.heightOfTree(node.right))>1){
+    if(this.checkHeight(node) === -1){
       return false;
     }
-    return this.isBalanced(node.left)&&this.isBalanced(node.right);
+    return true;
   }
 }
 const tree = new BinaryTree();
