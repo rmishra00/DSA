@@ -185,6 +185,15 @@ class BinaryTree {
     height(root);
     return diameter;
   }
+  pathSum(node, target){
+    if(node === null){
+      return false;
+    }
+    if(node.left===null && node.right === null && node.value === target){
+      return true;
+    }
+    return this.pathSum(node.left, target-node.value)||this.pathSum(node.right, target-node.value)
+  }
 }
 const tree = new BinaryTree();
 tree.root = new TreeNode(10);
